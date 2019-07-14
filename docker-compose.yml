@@ -1,13 +1,36 @@
-version: '3'
+version: '3.5'
+networks:
+  default:
+    name: dev
 services:
+
   docker:
     privileged: true
-    image: docker:dind
+    build: ./docker
     stop_grace_period: 1s
     ports:
     - "8081:8081"
     volumes:
+    - ./docker/daemon.json:/etc/docker/daemon.json
     - ./docker/images/preload:/preload
+    # - type: "bind"
+    #   source: ./registry/certs/domain.crt
+    #   target: /etc/docker/certs.d/registry:443/ca.crt
+
+  registry:
+    image: registry:2
+    expose:
+    - "443"
+    volumes:
+    - ./registry/data:/var/lib/registry
+    # - ./registry/certs:/certs
+    environment:
+    - REGISTRY_HTTP_ADDR=0.0.0.0:443
+    # - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+    # - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+    depends_on:
+    - docker
+
   cluster:
     build: ./cluster
     stop_grace_period: 1s
@@ -19,4 +42,4 @@ services:
     - DOCKER_HOST=tcp://docker:2375
     - WORKERS=0
     depends_on:
-    - docker
+    - registry
