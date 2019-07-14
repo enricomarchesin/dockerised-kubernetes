@@ -17,7 +17,8 @@ RUN wget -q https://github.com/tsl0922/ttyd/releases/download/1.5.1/ttyd_linux.x
 RUN mv ttyd_linux.x86_64 ttyd && chmod +x ttyd
 
 RUN apt-get install -y procps net-tools bash-completion nano
-COPY ./start.sh /setup/
+
 COPY ./ingress.yml /setup/
 
+COPY ./start.sh /setup/
 ENTRYPOINT [ "bash", "/setup/start.sh" ]

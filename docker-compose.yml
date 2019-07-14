@@ -36,10 +36,22 @@ services:
     stop_grace_period: 1s
     volumes:
     - ./docker/images:/setup/images
-    ports:
-    - "8022:8022"
+    expose:
+    - "8022"
+    # ports:
+    # - "8022:8022"
     environment:
     - DOCKER_HOST=tcp://docker:2375
     - WORKERS=0
     depends_on:
     - registry
+
+  gateway:
+    build: ./gateway
+    stop_grace_period: 1s
+    depends_on:
+    - cluster
+    environment:
+    - INLETS_TOKEN
+    - INLETS_REMOTE
+    - INLETS_UPSTREAM
