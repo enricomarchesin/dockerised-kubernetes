@@ -17,7 +17,7 @@ RUN chmod +x k3d-linux-amd64 && mv k3d-linux-amd64 /usr/local/bin/k3d
 RUN wget -q https://github.com/tsl0922/ttyd/releases/download/1.5.1/ttyd_linux.x86_64
 RUN mv ttyd_linux.x86_64 ttyd && chmod +x ttyd
 
-RUN apt-get install -y procps net-tools bash-completion nano locales-all tmux
+RUN apt-get install -y procps net-tools bash-completion vim nano locales-all tmux git
 
 COPY ./ingress.yml /setup/
 
