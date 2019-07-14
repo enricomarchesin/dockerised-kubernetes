@@ -19,4 +19,5 @@ RUN mv ttyd_linux.x86_64 ttyd && chmod +x ttyd
 RUN apt-get install -y procps net-tools bash-completion nano
 COPY ./start.sh /setup/
 COPY ./ingress.yml /setup/
+
 ENTRYPOINT [ "bash", "/setup/start.sh" ]
