@@ -9,8 +9,9 @@ sleep 5
 export KUBECONFIG="$(k3d get-kubeconfig --name='k3d')"
 source <(kubectl completion bash)
 
-kubectl create deployment nginx --image=nginx:1.16.0
-kubectl create service clusterip nginx --tcp=80:80
-kubectl apply -f ingress.yml
+kubectl create ns lb
+kubectl -n lb create deployment nginx --image=nginx:1.16.0
+kubectl -n lb create service clusterip nginx --tcp=80:80
+kubectl -n lb apply -f ingress.yml
 
 /setup/ttyd -p 8022 bash

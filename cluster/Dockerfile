@@ -1,4 +1,5 @@
 FROM debian:stretch-slim
+ARG MODE=cluster
 WORKDIR /setup
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -16,9 +17,9 @@ RUN chmod +x k3d-linux-amd64 && mv k3d-linux-amd64 /usr/local/bin/k3d
 RUN wget -q https://github.com/tsl0922/ttyd/releases/download/1.5.1/ttyd_linux.x86_64
 RUN mv ttyd_linux.x86_64 ttyd && chmod +x ttyd
 
-RUN apt-get install -y procps net-tools bash-completion nano
+RUN apt-get install -y procps net-tools bash-completion nano locales-all tmux
 
 COPY ./ingress.yml /setup/
 
-COPY ./start.sh /setup/
+COPY ./start-${MODE}.sh /setup/start.sh
 ENTRYPOINT [ "bash", "/setup/start.sh" ]

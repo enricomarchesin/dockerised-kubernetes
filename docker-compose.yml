@@ -38,8 +38,8 @@ services:
     - ./docker/images:/setup/images
     expose:
     - "8022"
-    # ports:
-    # - "8022:8022"
+    ports:
+    - "8022:8022"
     environment:
     - DOCKER_HOST=tcp://docker:2375
     - WORKERS=0
@@ -49,9 +49,48 @@ services:
   gateway:
     build: ./gateway
     stop_grace_period: 1s
-    depends_on:
-    - cluster
     environment:
     - INLETS_TOKEN
     - INLETS_REMOTE
-    - INLETS_UPSTREAM
+    - INLETS_DOMAIN
+    - INLETS_PREFIX
+    depends_on:
+    - cluster
+
+  machine1: &machine
+    build:
+      context: ./cluster
+      args:
+        MODE: machine
+    stop_grace_period: 1s
+    expose:
+    - "8022"
+    # ports:
+    # - "50122:8022"
+    environment:
+    - DOCKER_HOST=tcp://docker:2375
+    depends_on:
+    - gateway
+
+  machine2: 
+    <<: *machine
+    # ports:
+    # - "50222:8022"
+  machine3: *machine
+  machine4: *machine
+  machine5: *machine
+  machine6: *machine
+  machine7: *machine
+  machine8: *machine
+  machine9: *machine
+  machine10: *machine
+  machine11: *machine
+  machine12: *machine
+  machine13: *machine
+  machine14: *machine
+  machine15: *machine
+  machine16: *machine
+  machine17: *machine
+  machine18: *machine
+  machine19: *machine
+  machine20: *machine
