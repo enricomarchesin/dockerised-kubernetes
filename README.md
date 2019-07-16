@@ -4,7 +4,7 @@
 > _**Great for training and experiments!**_
 
 
-You can now deploy the super-lightweight [k3s](https://github.com/rancher/k3s) Kubernetes cluster from Rancher (uring [k3d](https://github.com/rancher/k3s)).
+You can now deploy the super-lightweight [k3s](https://github.com/rancher/k3s) Kubernetes cluster from Rancher (using [k3s](https://github.com/rancher/k3s)).
 
 The cluster is packaged for easy to setup training classes using Docker-in-Docker, and with the help of [ttyd](https://github.com/tsl0922/ttyd) and [inlets](https://github.com/alexellis/inlets).
 
