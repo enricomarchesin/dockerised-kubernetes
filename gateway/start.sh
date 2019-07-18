@@ -3,6 +3,7 @@ PFX="${INLETS_PREFIX}"
 DOM="${INLETS_DOMAIN}"
 
 UPS="${DOM}=http://docker:8081"
+UPS="${UPS},${PFX}0.${DOM}=http://cluster:8022"
 UPS="${UPS},${PFX}1.${DOM}=http://machine1:8022"
 UPS="${UPS},${PFX}2.${DOM}=http://machine2:8022"
 UPS="${UPS},${PFX}3.${DOM}=http://machine3:8022"
