@@ -14,4 +14,6 @@ kubectl -n lb create deployment nginx --image=nginx:1.16.0
 kubectl -n lb create service clusterip nginx --tcp=80:80
 kubectl -n lb apply -f ingress.yml
 
+# /setup/vnc.sh
+
 /setup/ttyd -p 8022 bash

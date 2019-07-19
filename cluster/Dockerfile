@@ -23,3 +23,12 @@ COPY ./ingress.yml /setup/
 
 COPY ./start-${MODE}.sh /setup/start.sh
 ENTRYPOINT [ "bash", "/setup/start.sh" ]
+
+# RUN apt-get install -y xvfb x11vnc xfce4
+# ENV  DISPLAY :1.0
+# RUN  mkdir ~/.x11vnc
+# RUN  x11vnc -storepasswd letmein ~/.x11vnc/passwd
+# COPY ./vnc.sh /setup/
+
+# RUN wget -O vscode.deb https://go.microsoft.com/fwlink/?LinkID=760868
+# RUN apt install ./vscode.deb
