@@ -46,3 +46,7 @@ resource "aws_instance" "master" {
   key_name                    = aws_key_pair.ssh-key.key_name
   user_data                   = file("user-data.conf")
 }
+
+output "master" {
+  value = aws_instance.master.public_ip
+}
