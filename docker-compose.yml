@@ -16,6 +16,8 @@ services:
     # - type: "bind"
     #   source: ./registry/certs/domain.crt
     #   target: /etc/docker/certs.d/registry:443/ca.crt
+    environment:
+    - DOCKER_TLS_CERTDIR=
 
   registry:
     image: registry:2
