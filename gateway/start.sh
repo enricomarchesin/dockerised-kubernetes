@@ -1,4 +1,4 @@
-#!/bins/bash
+#!/bin/bash
 PFX="${INLETS_PREFIX}"
 DOM="${INLETS_DOMAIN}"
 
