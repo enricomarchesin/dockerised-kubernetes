@@ -8,4 +8,4 @@ source <(kubectl completion bash)
 
 # /setup/vnc.sh
 
-/setup/ttyd -p 8022 bash
+ttyd -p 8022 bash

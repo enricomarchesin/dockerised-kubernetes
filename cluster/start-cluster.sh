@@ -16,4 +16,4 @@ kubectl -n lb apply -f ingress.yml
 
 # /setup/vnc.sh
 
-/setup/ttyd -p 8022 bash
+ttyd -p 8022 bash
