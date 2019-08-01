@@ -1,5 +1,5 @@
-resource "aws_security_group" "ssh" {
-  name = "ssh"
+resource "aws_security_group" "open" {
+  name = "open"
   vpc_id = aws_vpc.vpc.id
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
@@ -11,6 +11,24 @@ resource "aws_security_group" "ssh" {
     cidr_blocks = ["0.0.0.0/0"]
     from_port = 80
     to_port = 80
+    protocol = "tcp"
+  }
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 8081
+    to_port = 8081
+    protocol = "tcp"
+  }
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 50022
+    to_port = 52022
+    protocol = "tcp"
+  }
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 59000
+    to_port = 59020
     protocol = "tcp"
   }
   egress {
@@ -41,7 +59,7 @@ resource "aws_instance" "master" {
   instance_type               = var.master.type
   ami                         = data.aws_ami.debian.id
   associate_public_ip_address = true
-  vpc_security_group_ids      = ["${aws_security_group.ssh.id}"]
+  vpc_security_group_ids      = ["${aws_security_group.open.id}"]
   subnet_id                   = aws_subnet.public.id
   key_name                    = aws_key_pair.ssh-key.key_name
   user_data                   = file("user-data.conf")
