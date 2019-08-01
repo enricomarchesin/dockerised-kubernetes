@@ -67,7 +67,9 @@ INLETS_DOMAIN=publicserver.ext:8080
 INLETS_PREFIX=m
 ```
 
-Configure a few DNS entries with the form `INLETS_PREFIX`{1..20}.`INLETS_DOMAIN`, for example `m1.publicserver.ext`.
+Configure a few DNS entries with the form `INLETS_PREFIX`{1..20}.`INLETS_DOMAIN` (for example `m1.publicserver.ext`), plus `publicserver.ext` and `www.publicserver.ext`.
+
+Alternatively you can setup just `publicserver.ext` and a wildcard A record for `*.publicserver.ext`.
 
 Finally you can start the number of student machines you need, with a command like:
 
@@ -88,6 +90,7 @@ Each student will also be able to access its own machine shell at the urls:
 The default load balancer is configured to respond at:
 
 > http://publicserver.ext:8080
+> http://www.publicserver.ext:8080
 
 
 ## Don't forget!
