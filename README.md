@@ -4,9 +4,9 @@
 > _**Great for training and experiments!**_
 
 
-You can now deploy the super-lightweight [k3s](https://github.com/rancher/k3s) Kubernetes cluster from Rancher (uring [k3d](https://github.com/rancher/k3s)).
+You can now deploy the super-lightweight Kubernetes cluster, using the [k3d](https://github.com/rancher/k3s) project by Rancher.
 
-The cluster is packaged for easy to setup training classes using Docker-in-Docker, and with the help of [ttyd](https://github.com/tsl0922/ttyd) and [inlets](https://github.com/alexellis/inlets).
+The cluster is packaged for training classes that are easy to setup, thanks to Docker-in-Docker, and with the help of [ttyd](https://github.com/tsl0922/ttyd) and [inlets](https://github.com/alexellis/inlets).
 
 
 ## Start a (lightweight!) Kubernetes Cluster
@@ -17,7 +17,7 @@ docker-compose up cluster
 
 The console of the master machine can be reached at:
 
-> http://localhost:8022/
+> http://localhost:50022/
 
 From there you can run the usual `kubectl` commands, for example:
 
@@ -72,10 +72,16 @@ Configure a few DNS entries with the form `INLETS_PREFIX`{1..20}.`INLETS_DOMAIN`
 Finally you can start the number of student machines you need, with a command like:
 
 ```sh
-docker-compose up machine1 machine2 machine3
+docker-compose up machine3
 ```
 
-Each student will be able to access its own machine shell at the urls:
+The student machines are then reachable at:
+
+> http://localhost:50122/
+> http://localhost:50222/
+> http://localhost:50222/
+
+Each student will also be able to access its own machine shell at the urls:
 
 > http://m1.publicserver.ext:8080
 
