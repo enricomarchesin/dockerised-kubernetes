@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sLS https://get.inlets.dev | sh
+RUN curl -sLS "https://get.inlets.dev" | sh
 
 COPY ./start.sh /setup/
 CMD [ "bash", "/setup/start.sh" ]
