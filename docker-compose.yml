@@ -38,6 +38,7 @@ services:
     stop_grace_period: 1s
     volumes:
     - ./docker/images:/setup/images
+    - ./cluster/training:/setup/training
     expose:
     - "8022"
     - "5901"

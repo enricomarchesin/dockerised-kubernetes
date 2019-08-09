@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: script
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: cmd
+        image: debian:stretch-slim
+        command:
+        - "bash"
+        - "-c"
+        - "ls -la /etc/*.conf"
