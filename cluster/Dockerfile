@@ -4,7 +4,8 @@ WORKDIR /setup
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  ca-certificates curl wget procps net-tools locales-all tmux git bash-completion vim nano
+  ca-certificates curl wget procps net-tools locales-all tmux git pkgconf bash-completion vim nano \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL "https://get.docker.com" -o get-docker.sh && sh get-docker.sh
 
@@ -17,18 +18,20 @@ RUN mv k3d-linux-amd64 /usr/local/bin/k3d && chmod +x /usr/local/bin/k3d
 RUN curl -LO "https://github.com/tsl0922/ttyd/releases/download/1.5.1/ttyd_linux.x86_64"
 RUN mv ttyd_linux.x86_64 /usr/local/bin/ttyd && chmod +x /usr/local/bin/ttyd
 
+RUN git clone "https://github.com/ahmetb/kubectx.git" ~/.kubectx
+
 COPY ./ingress.yml /setup/
 
 COPY ./start-${MODE}.sh /setup/start.sh
 ENTRYPOINT [ "bash", "/setup/start.sh" ]
 
-RUN apt-get install -y --no-install-recommends \
-  xvfb x11vnc xfce4 dbus-user-session novnc
-ENV  DISPLAY :1.0
-RUN  mkdir ~/.x11vnc
-RUN  x11vnc -storepasswd 1234 ~/.x11vnc/passwd
-RUN curl -fsSL "https://go.microsoft.com/fwlink/?LinkID=760868" -o vscode.deb \
-  && apt install -y --no-install-recommends ./vscode.deb libasound2
-COPY ./vnc.sh /setup/
+# RUN apt-get install -y --no-install-recommends \
+#   xvfb x11vnc xfce4 dbus-user-session novnc \
+#   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# ENV  DISPLAY :1.0
+# RUN  mkdir ~/.x11vnc
+# RUN  x11vnc -storepasswd 1234 ~/.x11vnc/passwd
+# RUN curl -fsSL "https://go.microsoft.com/fwlink/?LinkID=760868" -o vscode.deb \
+#   && apt install -y --no-install-recommends ./vscode.deb libasound2
+# COPY ./vnc.sh /setup/

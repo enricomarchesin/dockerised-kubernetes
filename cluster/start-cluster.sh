@@ -1,19 +1,54 @@
 #!/bins/bash
 docker load --input /setup/images/k3s-v0.6.1.tar
-
 k3d create --image rancher/k3s:v0.6.1 --api-port docker:6443 --publish 8081:80 --name k3d --workers $WORKERS -v /preload:/var/lib/rancher/k3s/agent/images
 
 echo "Waiting 5s for cluster to initialise..."
 sleep 5
 
 export KUBECONFIG="$(k3d get-kubeconfig --name='k3d')"
+
+COMPDIR=$(pkg-config --variable=completionsdir bash-completion)
+ln -sf ~/.kubectx/completion/kubens.bash $COMPDIR/kubens
+ln -sf ~/.kubectx/completion/kubectx.bash $COMPDIR/kubectx
+cat << FOE >> ~/.bashrc
+
+source /etc/bash_completion
+
+#kubectl
 source <(kubectl completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
+
+#kubectx and kubens
+export PATH=~/.kubectx:\$PATH
+FOE
 
 kubectl create ns lb
 kubectl -n lb create deployment nginx --image=nginx:1.16.0
 kubectl -n lb create service clusterip nginx --tcp=80:80
 kubectl -n lb apply -f ingress.yml
 
-/setup/vnc.sh
+kubectl create ns ns01
+kubectl create ns ns02
+kubectl create ns ns03
+kubectl create ns ns04
+kubectl create ns ns05
+kubectl create ns ns06
+kubectl create ns ns07
+kubectl create ns ns08
+kubectl create ns ns09
+kubectl create ns ns10
+kubectl create ns ns11
+kubectl create ns ns12
+kubectl create ns ns13
+kubectl create ns ns14
+kubectl create ns ns15
+kubectl create ns ns16
+kubectl create ns ns17
+kubectl create ns ns18
+kubectl create ns ns19
+kubectl create ns ns20
+
+# /setup/vnc.sh
 
 ttyd -p 8022 bash
