@@ -28,15 +28,15 @@ kubectl -n lb create deployment nginx --image=nginx:1.16.0
 kubectl -n lb create service clusterip nginx --tcp=80:80
 kubectl -n lb apply -f ingress.yml
 
-kubectl create ns ns01
-kubectl create ns ns02
-kubectl create ns ns03
-kubectl create ns ns04
-kubectl create ns ns05
-kubectl create ns ns06
-kubectl create ns ns07
-kubectl create ns ns08
-kubectl create ns ns09
+kubectl create ns ns1
+kubectl create ns ns2
+kubectl create ns ns3
+kubectl create ns ns4
+kubectl create ns ns5
+kubectl create ns ns6
+kubectl create ns ns7
+kubectl create ns ns8
+kubectl create ns ns9
 kubectl create ns ns10
 kubectl create ns ns11
 kubectl create ns ns12

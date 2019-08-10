@@ -69,6 +69,8 @@ services:
       args:
         MODE: machine
     stop_grace_period: 1s
+    volumes:
+    - ./cluster/training:/setup/training
     expose:
     - "8022"
     ports:

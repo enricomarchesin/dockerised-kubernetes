@@ -23,4 +23,7 @@ FOE
 
 # /setup/vnc.sh
 
+cp -pr /setup/training ~/
+cd ~/
+
 ttyd -p 8022 bash
