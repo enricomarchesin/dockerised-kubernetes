@@ -7,7 +7,10 @@ resource "aws_route53_record" "www" {
   name    = "${var.stack.domain}"
   type    = "A"
   ttl     = "30"
-  records = [ aws_instance.master.public_ip ]
+  records = [
+    aws_spot_instance_request.master.public_ip
+    # aws_instance.master.public_ip
+  ]
 }
 
 resource "aws_route53_record" "wildcard" {
@@ -15,7 +18,10 @@ resource "aws_route53_record" "wildcard" {
   name    = "*.${var.stack.domain}"
   type    = "A"
   ttl     = "30"
-  records = [ aws_instance.master.public_ip ]
+  records = [
+    aws_spot_instance_request.master.public_ip
+    # aws_instance.master.public_ip
+  ]
 }
 
 output "dns" {

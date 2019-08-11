@@ -15,5 +15,6 @@ variable "ssh_public_key" {
 variable "master" {
   type = object({
     type = string
+    spot_duration_mins = number
   })
 }

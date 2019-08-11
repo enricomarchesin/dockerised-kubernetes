@@ -55,7 +55,12 @@ resource "aws_key_pair" "ssh-key" {
   public_key = var.ssh_public_key
 }
 
-resource "aws_instance" "master" {
+resource "aws_spot_instance_request" "master" {
+  wait_for_fulfillment        = true
+  spot_type                   = "one-time"
+  block_duration_minutes      = var.master.spot_duration_mins
+
+# resource "aws_instance" "master" {
   instance_type               = var.master.type
   ami                         = data.aws_ami.debian.id
   associate_public_ip_address = true
@@ -66,5 +71,6 @@ resource "aws_instance" "master" {
 }
 
 output "master" {
-  value = aws_instance.master.public_ip
+  value = aws_spot_instance_request.master.public_ip
+  # value = aws_instance.master.public_ip
 }
