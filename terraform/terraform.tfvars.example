@@ -18,8 +18,8 @@ master = {
   # "type" = "r5d.2xlarge"
 
   # 8 VCPUs, 32GB RAM, 1x300GB NVMe, 0.504$/H
-  # m5d.2xlarge	 
+  # "type" = "m5d.2xlarge"
 
   # 16 VCPUs, 64GB RAM, 2x300GB NVMe, 1.008$/H
-  # m5d.4xlarge	 
+  # "type" = "m5d.4xlarge"
 }

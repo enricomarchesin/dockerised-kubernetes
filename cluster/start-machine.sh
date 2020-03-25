@@ -26,4 +26,6 @@ FOE
 cp -pr /setup/training ~/
 cd ~/
 
+export PYTHONIOENCODING=utf-8
+
 ttyd -p 8022 bash

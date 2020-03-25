@@ -38,7 +38,7 @@ services:
     stop_grace_period: 1s
     volumes:
     - ./docker/images:/setup/images
-    - ./cluster/training:/setup/training
+    - ./cluster/poetry-training:/setup/training
     expose:
     - "8022"
     - "5901"
@@ -70,7 +70,7 @@ services:
         MODE: machine
     stop_grace_period: 1s
     volumes:
-    - ./cluster/training:/setup/training
+    - ./cluster/poetry-training:/setup/training
     expose:
     - "8022"
     ports:
