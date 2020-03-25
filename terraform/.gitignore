@@ -7,3 +7,6 @@
 
 # custom vars
 *.tfvars
+
+# notes
+*.txt
