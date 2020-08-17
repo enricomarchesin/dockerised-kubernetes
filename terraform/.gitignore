@@ -1,0 +1,12 @@
+# Terraform working dirs
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# custom vars
+*.tfvars
+
+# notes
+*.txt

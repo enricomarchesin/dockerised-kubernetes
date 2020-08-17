@@ -16,6 +16,8 @@ services:
     # - type: "bind"
     #   source: ./registry/certs/domain.crt
     #   target: /etc/docker/certs.d/registry:443/ca.crt
+    environment:
+    - DOCKER_TLS_CERTDIR=
 
   registry:
     image: registry:2
@@ -36,10 +38,15 @@ services:
     stop_grace_period: 1s
     volumes:
     - ./docker/images:/setup/images
+    - ./cluster/poetry-training:/setup/training
     expose:
     - "8022"
+    - "5901"
+    - "5981"
     ports:
-    - "8022:8022"
+    - "50022:8022"
+    - "59000:5901"
+    - "58000:5981"
     environment:
     - DOCKER_HOST=tcp://docker:2375
     - WORKERS=0
@@ -53,7 +60,6 @@ services:
     - INLETS_TOKEN
     - INLETS_REMOTE
     - INLETS_DOMAIN
-    - INLETS_PREFIX
     depends_on:
     - cluster
 
@@ -63,10 +69,13 @@ services:
       args:
         MODE: machine
     stop_grace_period: 1s
+    volumes:
+    - ./cluster/poetry-training:/setup/training
     expose:
     - "8022"
-    # ports:
-    # - "50122:8022"
+    ports:
+    - "50122:8022"
+    - "59001:5901"
     environment:
     - DOCKER_HOST=tcp://docker:2375
     depends_on:
@@ -74,23 +83,134 @@ services:
 
   machine2: 
     <<: *machine
-    # ports:
-    # - "50222:8022"
-  machine3: *machine
-  machine4: *machine
-  machine5: *machine
-  machine6: *machine
-  machine7: *machine
-  machine8: *machine
-  machine9: *machine
-  machine10: *machine
-  machine11: *machine
-  machine12: *machine
-  machine13: *machine
-  machine14: *machine
-  machine15: *machine
-  machine16: *machine
-  machine17: *machine
-  machine18: *machine
-  machine19: *machine
-  machine20: *machine
+    ports:
+    - "50222:8022"
+    - "59002:5901"
+    depends_on:
+    - machine1
+  machine3: 
+    <<: *machine
+    ports:
+    - "50322:8022"
+    - "59003:5901"
+    depends_on:
+    - machine2
+  machine4: 
+    <<: *machine
+    ports:
+    - "50422:8022"
+    - "59004:5901"
+    depends_on:
+    - machine3
+  machine5: 
+    <<: *machine
+    ports:
+    - "50522:8022"
+    - "59005:5901"
+    depends_on:
+    - machine4
+  machine6: 
+    <<: *machine
+    ports:
+    - "50622:8022"
+    - "59006:5901"
+    depends_on:
+    - machine5
+  machine7: 
+    <<: *machine
+    ports:
+    - "50722:8022"
+    - "59007:5901"
+    depends_on:
+    - machine6
+  machine8: 
+    <<: *machine
+    ports:
+    - "50822:8022"
+    - "59008:5901"
+    depends_on:
+    - machine7
+  machine9: 
+    <<: *machine
+    ports:
+    - "50922:8022"
+    - "59009:5901"
+    depends_on:
+    - machine8
+  machine10: 
+    <<: *machine
+    ports:
+    - "51022:8022"
+    - "59010:5901"
+    depends_on:
+    - machine9
+  machine11: 
+    <<: *machine
+    ports:
+    - "51122:8022"
+    - "59011:5901"
+    depends_on:
+    - machine10
+  machine12: 
+    <<: *machine
+    ports:
+    - "51222:8022"
+    - "59012:5901"
+    depends_on:
+    - machine11
+  machine13: 
+    <<: *machine
+    ports:
+    - "51322:8022"
+    - "59013:5901"
+    depends_on:
+    - machine12
+  machine14: 
+    <<: *machine
+    ports:
+    - "51422:8022"
+    - "59014:5901"
+    depends_on:
+    - machine13
+  machine15: 
+    <<: *machine
+    ports:
+    - "51522:8022"
+    - "59015:5901"
+    depends_on:
+    - machine14
+  machine16: 
+    <<: *machine
+    ports:
+    - "51622:8022"
+    - "59016:5901"
+    depends_on:
+    - machine15
+  machine17: 
+    <<: *machine
+    ports:
+    - "51722:8022"
+    - "59017:5901"
+    depends_on:
+    - machine16
+  machine18: 
+    <<: *machine
+    ports:
+    - "51822:8022"
+    - "59018:5901"
+    depends_on:
+    - machine17
+  machine19: 
+    <<: *machine
+    ports:
+    - "51922:8022"
+    - "59019:5901"
+    depends_on:
+    - machine18
+  machine20: 
+    <<: *machine
+    ports:
+    - "52022:8022"
+    - "59020:5901"
+    depends_on:
+    - machine19

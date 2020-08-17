@@ -1,0 +1,25 @@
+stack = {
+  "profile" = "workshops"
+  "id"      = "01"
+  "name"    = "kube"
+  "region"  = "eu-west-1"
+  "domain"  = "publicserver.ext"
+}
+
+ssh_public_key = "ssh-rsa xxxxxyyyyyyzzzzz"
+
+master = {
+  spot_duration_mins = 120
+
+  # 4 VCPUs, 32GB RAM, 1x150GB NVMe, 0.32$/H
+  "type" = "r5d.xlarge"
+
+  # 8 VCPUs, 64GB RAM, 1x300GB NVMe, 0.64$/H
+  # "type" = "r5d.2xlarge"
+
+  # 8 VCPUs, 32GB RAM, 1x300GB NVMe, 0.504$/H
+  # "type" = "m5d.2xlarge"
+
+  # 16 VCPUs, 64GB RAM, 2x300GB NVMe, 1.008$/H
+  # "type" = "m5d.4xlarge"
+}

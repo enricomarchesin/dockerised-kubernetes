@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: www
+spec:
+  selector:
+    app: webapp
+  ports:
+  - port: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+  labels:
+    app: webapp
+spec:
+  containers:
+  - name: server
+    image: nginx:1.17.2
+    volumeMounts:
+    - readOnly: true
+      mountPath: /usr/share/nginx/html
+      name: html
+    resources:
+      limits:
+        cpu: 100m
+        memory: 10Mi
+  volumes:
+    - name: html
+      configMap:
+        name: files
+---  
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: files
+data:
+  index.html: |
+    NS-xx!
