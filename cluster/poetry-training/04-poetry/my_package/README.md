@@ -10,9 +10,9 @@ poetry env list
 poetry add python-cfonts
 poetry show --tree
 cfonts
-poetry run cfonts
 poetry shell
 cfonts
+poetry run cfonts
 poetry build
 ls -la dist/
 ```

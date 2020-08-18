@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "my_package"
-version = "0.1.0"
+version = "0.0.1"
 description = ""
 authors = ["Enrico Marchesin <enrico@cainthus.com>"]
 
